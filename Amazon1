@@ -1,0 +1,23 @@
+ORDERS: ORDER_ID (pk), ORDER_DATE, CUSTOMER_ID (fk), ORDER_STATUS, SHIPPING_ADDRESS_ID (fk), CREATED_AT
+ORDER_ITEMS: ORDER_ITEM_ID (pk), ORDER_ID (fk), ITEM_ID (fk), QUANTITY
+ITEMS: ITEM_ID (pk), ITEM_NAME, ITEM_CATEGORY
+CUSTOMERS: CUSTOMER_ID(pk), FULL_NAME
+ADDRESSES: ADDRESS_ID (pk), ADDRESS, STATE, ZIP_CODE
+
+pk = Primary Key
+fk = Foreign Key
+
+
+#1) Write a SQL query to find # of orders per day and units per order (all in one query)
+
+SELECT COUNT(ORDER_ID) 
+
+(SELECT DISTINCT OR, QUANTITY FROM ORDERS GROUP BY ORDE
+
+
+ORDER_DATE, TOTAL_ORDERS, UNITS_PER_ORDER
+
+
+#2) Write a SQL query to find out # of customers who purchased both Kindle and Alexa.  
+SELECT COUNT(*) FROM ORDER_ITEMS O JOIN ON ITEMS I ON (I.ITEM_ID = O.ORDER_ID)
+WHERE I.ITEM_NAME LIKE = 'Kindle' AND 'Alexa'
