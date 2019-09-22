@@ -1,0 +1,5 @@
+-- write your code in PostgreSQL 9.4 
+SELECT Z.name, E.all_test_values, E.passed_cases, E.sum_test_values FROM (SELECT A.name as name, A.all_test_values, B.passed_cases, A.sum_test_values FROM ( (SELECT g.name as name, count(test_value) as all_test_values, sum(test_value) as sum_test_values FROM test_groups g JOIN test_cases c ON g.name = c.group_name group by g.name) A LEFT join (SELECT g.name as name, count(CASE WHEN status = 'OK' THEN 1 ELSE 0 END) passed_cases FROM test_groups g LEFT JOIN test_cases c ON g.name = c.group_name group by g.name) B ON A.name = B.name)) E full outer join test_groups Z on E.name = Z.name
+
+
+Question 2: Minimum number of rooms required to accomodate all meetings. 
