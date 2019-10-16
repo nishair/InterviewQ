@@ -10,6 +10,14 @@ fk = Foreign Key
 
 #1) Write a SQL query to find # of orders per day and units per order (all in one query)
 
+SELECT ORDER_DATE, 
+       Count(DISTINCT O.OrderID) AS TotalOrders, 
+       Sum(OI.Order_ITEM_ID) AS Units per order 
+FROM [Orders] O
+INNER JOIN [OrderItem] OI
+  ON O.OrderID = OI.OrderID
+GROUP BY ORDER_ID;
+
 SELECT COUNT(ORDER_ID) 
 
 (SELECT DISTINCT OR, QUANTITY FROM ORDERS GROUP BY ORDE
