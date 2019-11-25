@@ -1,0 +1,113 @@
+Problem #1
+def even(x):
+	is_even = (x & 1) == 0
+	return is_even
+
+even(4)
+
+Problem #2
+def odd(x):
+	is_odd = (x & 1) == 1
+	return is_odd
+
+odd(3)
+
+Problem #3
+def sumOdd(max_list_value):
+    numbers = range(0, max_list_value+1)
+    total = 0
+    for num in numbers:
+        if num % 2 == 1:
+            total += num
+    return total
+
+if __name__ == '__main__':
+    print(sumOdd(5))
+####9
+
+if __name__ == '__main__':
+    print(sumOdd(50))
+####625
+
+
+Problem #4
+import ssl
+import urllib
+import pandas as pd 
+
+ssl._create_default_https_context = ssl._create_unverified_context
+url = 'https://raw.githubusercontent.com/tmountain/mockdata/master/employees.csv'
+urllib.request.urlopen(url)
+
+df = pd.read_csv(url,index_col=0,parse_dates=[0])
+
+dict = df.T.to_dict()
+
+
+def avgSalary(dept, dict):
+	total = 0
+	count = 0
+	for x in dict.values():
+		if x['department'] == dept:
+			count += 1
+			total += x['salary']
+			#print(x)
+	average = total/count
+	return int(average)
+
+dept = 'Services'
+averageSalary = avgSalary(dept, dict)
+#65484
+
+
+Problem #5
+def headcount(dict):
+	lister = []
+	for x in range(1,len(dict)):
+		#print(dict[x]['department'])
+		lister.append(dict[x]['department'])
+	setter = set(lister)
+	dict_return = {}
+	for x in setter:
+		count = 0
+		for y in dict.values():
+			if y['department'] == x:
+				count+= 1
+		dict_return[x]=count
+	return dict_return
+
+headcount = headcount(dict)
+
+headcount
+{'Training': 95, 'Legal': 84, 'Services': 95, 'Research and Development': 74, 'Marketing': 92, 'Business Development': 93, 'Engineering': 73, 'Product Management': 88, 'Accounting': 73, 'Support': 80, 'Human Resources': 77, 'Sales': 76}
+
+
+
+
+Problem #7
+create table schema.farmers (id number(10), name varchar2(40), primary key(id))
+
+create table schema.cow ( id number (10), farmer_id number(10), name varchar2(40), primary key (id), foreign key(farmer_id))
+
+-- I didn't have access to SQLLite, hopefully the next candidate doesn't face this issue and I think this should be announced before this test. Since these answers are all hypothetical without having a db and testing my code. 
+
+Problem #8
+select count(id), farmer_id from cow group by farmer_id;
+
+Problem #9
+select count(c.id) from cow c join farmers f on c.farmer_id = f.id where f.name = 'Orsa';
+
+Problem #10
+select count(*) from (
+	select count(id), farmer_id 
+	from cow 
+	group by farmer_id 
+	having count(id) > 15 );
+
+Problem #11:
+If I could actually run the query. I would rather have distributed computing framework with HDFS and Spark into my architecture so that scale is never an issue. If it is we bump up the number of executors and executor memory instead of using SQL
+
+
+
+
+
